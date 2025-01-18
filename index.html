@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clínica de Adicciones Sentido de Vida</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Clínica de Adicciones Sentido de Vida</h1>
+      <p>Salvando vidas; Una a la vez;</p>
+    </header>
+
+    <section class="preguntas">
+      <h2>Preguntas Frecuentes</h2>
+      <div class="pregunta" onclick="mostrarRespuesta(0)">
+        <p>¿Qué servicios ofrece el Centro de Tratamientos en Adicciones Sentido de Vida?</p>
+      </div>
+      <div class="pregunta" onclick="mostrarRespuesta(1)">
+        <p>¿Qué tipo de adicciones tratan?</p>
+      </div>
+      <div class="pregunta" onclick="mostrarRespuesta(2)">
+        <p>¿También ayudan con problemas emocionales?</p>
+      </div>
+      <div class="pregunta" onclick="mostrarRespuesta(3)">
+        <p>¿Es necesario internarse en la clínica?</p>
+      </div>
+      <div class="pregunta" onclick="mostrarRespuesta(4)">
+        <p>¿Qué es un tratamiento residencial?</p>
+      </div>
+
+      <div id="respuesta" class="respuesta">
+        <p id="respuesta-texto"></p>
+        <button onclick="siguientePregunta()">Siguiente</button>
+      </div>
+    </section>
+
+    <section class="contacto">
+      <h2>¿Necesitas ayuda? ¡Contáctanos!</h2>
+      <form id="contact-form">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="tel" id="telefono" placeholder="Teléfono" required>
+        <input type="email" id="email" placeholder="Email" required>
+        <textarea id="mensaje" placeholder="Mensaje" required></textarea>
+        <button type="button" onclick="enviarFormulario()">Enviar</button>
+      </form>
+    </section>
+
+    <section class="informacion">
+      <p><strong>Dirección:</strong> Camino a las Islas # 11, Zapotlanejo, Jalisco.</p>
+      <p><strong>Teléfono de contacto:</strong> 33 3196 2135</p>
+      <p><strong>Directora general. Psicóloga:</strong> Ma. Teresa Hernández</p>
+      <p><strong>Email:</strong> psic.tere.hdz@clinicasentidodevida.com.mx</p>
+    </section>
+
+    <footer>
+      <div class="redes">
+        <a href="https://www.facebook.com/clinicaenadiccionessentidodevidagdl/?locale=es_la" target="_blank">Facebook</a>
+        <a href="https://www.instagram.com/rehabilitacion_sentido_de_vida/?hl=es-es" target="_blank">Instagram</a>
+        <a href="https://www.threads.net/@rehabilitacion_sentido_de_vida?xmt=aqgzaemdhsqh-3h4enjiaeo8b6kx7dqkcbrbvqqp-lwq_lq" target="_blank">Threads</a>
+        <a href="https://www.tiktok.com/@clinica_sentido_de_vida" target="_blank">TikTok</a>
+        <a href="https://www.youtube.com/channel/UCC8G_kpmHlhTV119rcrJ34A" target="_blank">YouTube</a>
+        <a href="https://www.dailymotion.com/psic.tere.hdz" target="_blank">Dailymotion</a>
+        <a href="https://mx.pinterest.com/psicterehdz/" target="_blank">Pinterest</a>
+        <a href="https://www.flickr.com/photos/200574295@n02/" target="_blank">Flickr</a>
+        <a href="https://wordpress.com/view/clinicasentidodevida.wordpress.com" target="_blank">WordPress</a>
+        <a href="https://clinicasentidodevida.blogspot.com/" target="_blank">Blogspot</a>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const preguntas = [
+      { pregunta: "¿Qué servicios ofrece el Centro de Tratamientos en Adicciones Sentido de Vida?", respuesta: "Ofrecemos tratamientos para la rehabilitación de adicciones como alcohol, drogas, tabaco, y también brindamos apoyo emocional para trastornos como ansiedad, depresión y estrés." },
+      { pregunta: "¿Qué tipo de adicciones tratan?", respuesta: "Tratamos adicciones al alcohol, cannabis, cocaína, cristal y tabaco, entre otras." },
+      { pregunta: "¿También ayudan con problemas emocionales?", respuesta: "Sí, trabajamos con problemas emocionales como ansiedad, depresión, fobias y trastornos obsesivo-compulsivos." },
+      { pregunta: "¿Es necesario internarse en la clínica?", respuesta: "Dependiendo de cada caso, ofrecemos opciones de tratamiento residencial y ambulatorio." },
+      { pregunta: "¿Qué es un tratamiento residencial?", respuesta: "Es un tratamiento donde el paciente permanece en nuestras instalaciones durante todo el proceso de rehabilitación para recibir atención intensiva." }
+    ];
+
+    let preguntaActual = 0;
+
+    function mostrarRespuesta(index) {
+      document.getElementById('respuesta').style.display = 'block';
+      document.getElementById('respuesta-texto').textContent = preguntas[index].respuesta;
+      preguntaActual = index;
+    }
+
+    function siguientePregunta() {
+      if (preguntaActual < preguntas.length - 1) {
+        preguntaActual++;
+        document.getElementById('respuesta-texto').textContent = preguntas[preguntaActual].respuesta;
+      }
+    }
+
+    function enviarFormulario() {
+      const nombre = document.getElementById('nombre').value;
+      const telefono = document.getElementById('telefono').value;
+      const email = document.getElementById('email').value;
+      const mensaje = document.getElementById('mensaje').value;
+
+      const data = {
+        nombre,
+        telefono,
+        email,
+        mensaje
+      };
+
+      axios.post('https://formsubmit.co/psic.tere.hdz@clinicasentidodevida.com.mx', data)
+        .then(response => alert('Formulario enviado correctamente'))
+        .catch(error => alert('Error al enviar el formulario'));
+    }
+  </script>
+</body>
+</html>
